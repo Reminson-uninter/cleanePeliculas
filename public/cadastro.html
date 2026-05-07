@@ -125,6 +125,67 @@
       text-align: center;
       padding: 15px 0;
     }
+    /* Ajustes gerais para telas menores */
+@media (max-width: 768px) {
+  header {
+    font-size: 1.5rem;
+    padding: 15px 0;
+  }
+
+  .conteudo {
+    flex-direction: column;   /* empilha tabela e formulário */
+    gap: 15px;
+  }
+
+  .tabela, aside {
+    min-width: 100%;          /* ocupa toda a largura */
+    box-shadow: none;         /* simplifica para mobile */
+  }
+
+  table {
+    font-size: 0.9rem;        /* reduz fonte da tabela */
+  }
+
+  th, td {
+    padding: 8px;
+  }
+
+  .itens input, .itens textarea {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  .itens input[type="submit"] {
+    width: 100%;              /* botão ocupa toda a largura */
+    padding: 12px;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 10px 0;
+  }
+}
+
+/* Ajustes extras para telas muito pequenas (celulares) */
+@media (max-width: 480px) {
+  header {
+    font-size: 1.2rem;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;         /* rolagem horizontal se necessário */
+  }
+
+  th, td {
+    font-size: 0.8rem;
+  }
+
+  .itens h2 {
+    font-size: 1.2rem;
+  }
+}
+
   </style>
 </head>
 <body>
