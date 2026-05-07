@@ -1,10 +1,26 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+//import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   getFirestore,
   collection,
   getDocs,
   addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+
+
+/*const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "cadastro.html"; // redireciona se não estiver logado
+  }
+});
+*/
+
 
 // 1. Configuração do Firebase (substitua pelos dados reais do seu projeto)
 const firebaseConfig = {
@@ -125,23 +141,38 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // --- Finalizar pedido ---
-  window.enviarPedido = async function () {
-    if (carrinho.length === 0) {
-      alert("Seu carrinho está vazio!");
-      return;
-    }
+// --- Finalizar pedido ---
+window.enviarPedido = async function () {
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
 
-    // Salva pedido no Firestore
-    await addDoc(collection(db, "pedidos"), {
-      itens: carrinho,
-      total: carrinho.reduce((acc, item) => acc + item.preco, 0),
-      data: new Date(),
-    });
+  // Salva pedido no Firestore
+  await addDoc(collection(db, "pedidos"), {
+    itens: carrinho,
+    total: carrinho.reduce((acc, item) => acc + item.preco, 0),
+    data: new Date(),
+  });
 
-    alert("✅ Pedido registrado! Cleane entrará em contato via WhatsApp.");
-    carrinho = [];
-    atualizarCarrinho();
-  };
+  // Monta mensagem para WhatsApp
+  let mensagem = "Olá, Cleane! Gostaria de finalizar meu pedido:%0A";
+  carrinho.forEach((item) => {
+    mensagem += `- ${item.nome} (R$ ${item.preco.toFixed(2)})%0A`;
+  });
+  mensagem += `Total: R$ ${carrinho.reduce((acc, item) => acc + item.preco, 0).toFixed(2)}`;
+
+  // Número da Cleane (substitua pelo número real com DDI + DDD + número)
+  const numeroWhatsApp = "5573991350755"; // exemplo: 55 + DDD + número
+
+  // Redireciona para WhatsApp
+  window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, "_blank");
+
+  // Limpa carrinho
+  carrinho = [];
+  atualizarCarrinho();
+};
+
 
   // --- Filtro de busca ---
   campoBusca.addEventListener("input", (e) => {
