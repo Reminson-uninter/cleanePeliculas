@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
+  <title>Cleane Películas - Catálogo</title>
+  <style>
+    /* 1. ESTILOS GLOBAIS E RESET */
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
       background: #fffafc;
       color: #333;
+      line-height: 1.5;
     }
 
     header {
@@ -33,15 +36,17 @@
     }
 
     .admin-area button {
-      background: rgba(0,0,0,0.2);
+      background: rgba(0, 0, 0, 0.2);
       color: white;
       border: 1px solid rgba(255,255,255,0.3);
       padding: 0.3rem 0.6rem;
       border-radius: 4px;
       cursor: pointer;
       font-size: 0.7rem;
+      transition: 0.3s;
     }
 
+    /* 2. BUSCA RESPONSIVA */
     .busca {
       text-align: center;
       margin: 2rem 1rem;
@@ -53,11 +58,20 @@
       max-width: 600px;
       border-radius: 30px;
       border: 2px solid #ffccd5;
-      font-size: 1rem;
+      outline: none;
+      font-size: 1rem; /* Evita zoom no iOS */
+      transition: 0.3s;
     }
 
+    .busca input:focus {
+      border-color: #ff6b81;
+      box-shadow: 0 0 8px rgba(255, 107, 129, 0.2);
+    }
+
+    /* 3. GRID DE PRODUTOS RESPONSIVO */
     .produtos {
       display: grid;
+      /* minmax(250px) garante que os cards não fiquem muito estreitos */
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       padding: 20px;
@@ -65,33 +79,75 @@
       margin: 0 auto;
     }
 
-    .card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      padding: 15px;
-      text-align: center;
+   /* 1. Ajuste no Card para ser flexível */
+.card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  padding: 15px;
+  text-align: center;
 
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
+  /* Configuração para o card esticar conforme o texto */
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Garante que todos os cards da mesma linha tenham o mesmo tamanho */
+  transition: transform 0.3s ease;
+}
 
-    /* ✅ CORRIGIDO: versão única e funcional */
+/* 2. Ajuste no Parágrafo (O segredo para o Redmi/Android) */
+.card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 10px 0 20px 0;
+
+  /* Removemos o min-height fixo e deixamos o flex-grow agir */
+  flex-grow: 1; 
+
+  /* Se você quiser que o texto apareça TODO, use estas linhas: */
+  height: auto; 
+  overflow: visible; 
+  display: block;
+
+  /* OPCIONAL: Se quiser que corte com "..." após 4 linhas, use:
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
+  */
+}
+
+/* 3. Ajuste de Grid para telas mobile */
+@media (max-width: 480px) {
+  .produtos {
+    /* Diminuímos o minmax para o card não tentar ser largo demais no Redmi */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .card {
+    padding: 10px; /* Menos espaço interno sobra mais para o texto */
+  }
+
+  .card h3 {
+    font-size: 1rem; /* Título um pouco menor no celular */
+  }
+}
+
+    /* Ajuste do texto: agora ele aparece por completo e empurra o botão */
     .card p {
       font-size: 0.9rem;
       color: #666;
-      margin: 10px 0 20px 0;
-
-      flex-grow: 1;
-      height: auto;
-      overflow: visible;
+      margin-bottom: 20px;
+      min-height: 50px; /* Garante alinhamento visual básico */
     }
 
     .card .preco {
       font-size: 1.3rem;
       font-weight: bold;
+      color: #333;
       margin-bottom: 15px;
+      display: block;
     }
 
     .card button {
@@ -103,15 +159,14 @@
       cursor: pointer;
       font-weight: bold;
       width: 100%;
-
-      /* ✅ mantém o botão sempre embaixo */
-      margin-top: auto;
+      transition: 0.3s;
     }
 
     .card button:hover {
       background: #e85c72;
     }
 
+    /* 4. CARRINHO AJUSTADO */
     .carrinho {
       background: #ffeef2;
       padding: 1.5rem;
@@ -121,10 +176,9 @@
       border: 2px dashed #ffb3c1;
     }
 
+    /* Centralizar o carrinho em telas grandes */
     @media (min-width: 800px) {
-      .carrinho {
-        margin: 3rem auto;
-      }
+      .carrinho { margin: 3rem auto; }
     }
 
     .carrinho-acoes {
@@ -142,6 +196,7 @@
       border-radius: 50px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 1rem;
     }
 
     .btn-limpar {
@@ -154,25 +209,13 @@
       cursor: pointer;
     }
 
-    /* ✅ MOBILE OTIMIZADO */
+    /* 5. MEDIA QUERIES PARA CELULARES PEQUENOS */
     @media (max-width: 480px) {
-
-      header {
-        padding: 3rem 1rem 1.5rem;
-      }
+      header { padding: 3rem 1rem 1.5rem; }
 
       .produtos {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 12px;
-        padding: 10px;
-      }
-
-      .card {
-        padding: 10px;
-      }
-
-      .card h3 {
-        font-size: 1rem;
+        grid-template-columns: 1fr; /* Um card por linha em telas muito pequenas */
+        padding: 15px;
       }
 
       .carrinho-acoes {
@@ -185,7 +228,6 @@
         right: 0;
       }
     }
-
   </style>
 </head>
 <body>
