@@ -8,6 +8,8 @@
     /* 1. ESTILOS GLOBAIS E RESET */
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
@@ -141,16 +143,11 @@
   margin: 0 auto;
 }
 
-/* MOBILE */
+/* MOBILE PORTRAIT (até 480px) */
 @media (max-width: 480px) {
   header {
     padding: 2.5rem 1rem 1.5rem;
   }
-  @media screen and (max-width: 768px) and (orientation: landscape) {
-  header {
-    padding: 1.5rem 0.5rem;
-  }
-  
 
   .produtos {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -179,7 +176,83 @@
     justify-content: center;
     right: 0;
   }
+
+  .carrinho {
+    margin-left: 0; /* remove margem fixa */
+    padding: 10px;
+  }
 }
+
+/* MOBILE LANDSCAPE (até 740px em horizontal) */
+@media screen and (max-width: 740px) and (orientation: landscape) {
+  header {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .produtos {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .card h3 {
+    font-size: 0.9rem;
+  }
+
+  .card p {
+    font-size: 0.8rem;
+  }
+
+  .carrinho {
+    margin-left: 20px; /* remove margem fixa */
+    padding: 10px;
+    width: 100%;
+    
+  }
+}
+.finalizar{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+  .btn-enviar{
+    background-color: #23d40c;
+    color: rgb(249, 250, 248);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 50%;
+    transition: 0.3s;
+  }
+
+  .btn-limpar{
+    background-color: #ff4d6d;
+    color: rgb(249, 250, 248);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 20%;
+    transition: 0.3s;
+  }
+
+  .carrinho-acoes {
+
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
 
   </style>
 </head>
@@ -189,27 +262,25 @@
     <h1>Cleane Películas</h1>
     <p>Modelos exclusivos para deixar suas unhas incríveis!</p>
 
-    <div class="admin-area">
-      <button id="btnLogin" onclick="window.location.href='login.html'">Login</button>
-      <button id="btnLogout" style="display:none;">Sair</button>
-    </div>
   </header>
 
   <section class="busca">
     <input type="text" id="campoBusca" placeholder="🔍 Procure por floral, glitter, francesa..." />
   </section>
-
+   
+ 
   <main class="produtos" id="cards">
     <p style="text-align: center; grid-column: 1/-1;">✨ Carregando as melhores películas para você...</p>
   </main>
 
+   <div class="finalizar">
   <section class="carrinho" id="secao-carrinho">
-    <h2>🛒 Seu Pedido</h2>
-    <ul id="lista-carrinho" style="list-style: none; padding: 0;">
+    <h2 style="margin-left: 10px;">🛒 Seu Pedido</h2>
+    <ul id="lista-carrinho" style="list-style: none; padding: 15px;">
       <li style="color: #999;">O carrinho está vazio.</li>
     </ul>
 
-    <div style="text-align: right; margin-top: 15px;">
+    <div style="text-align: right; margin-top: 15px; margin-right: 20px;">
       <p class="total" style="font-size: 1.2rem; font-weight: bold;">
         Total: <span style="color: #ff4d6d;">R$ <span id="total">0.00</span></span>
       </p>
@@ -220,7 +291,7 @@
       <button class="btn-enviar" onclick="enviarPedido()">Finalizar via WhatsApp</button>
     </div>
   </section>
-
+  </div>
   <script type="module" src="./js/cleane_peliculas.js"></script>
 
 
