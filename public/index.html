@@ -5,90 +5,93 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cleane Películas - Catálogo</title>
   <style>
-    /* 1. ESTILOS GLOBAIS E RESET */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+   /* 1. ESTILOS GLOBAIS E RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    body {
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      background: #fffafc;
-      color: #333;
-      line-height: 1.5;
-    }
+body {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: #fffafc;
+  color: #333;
+  line-height: 1.5;
+}
 
-    header {
-      background: #ff6b81;
-      color: white;
-      padding: 2.5rem 1rem;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
+/* HEADER */
+header {
+  background: #ff6b81;
+  color: white;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
-    .admin-area {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      display: flex;
-      gap: 5px;
-    }
+.admin-area {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 5px;
+}
 
-    .admin-area button {
-      background: rgba(0, 0, 0, 0.2);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.3);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      transition: 0.3s;
-    }
+.admin-area button {
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: 0.3s;
+}
 
-    /* 2. BUSCA RESPONSIVA */
-    .busca {
-      text-align: center;
-      margin: 2rem 1rem;
-    }
+/* 2. BUSCA / FILTRO RESPONSIVO */
+.busca {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 2rem 1rem;
+}
 
-    .busca input {
-      padding: 0.8rem 1.2rem;
-      width: 100%;
-      max-width: 600px;
-      border-radius: 30px;
-      border: 2px solid #ffccd5;
-      outline: none;
-      font-size: 1rem; /* Evita zoom no iOS */
-      transition: 0.3s;
-    }
+.busca input,
+.busca select,
+.busca button {
+  flex: 1 1 200px;
+  max-width: 300px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 30px;
+  border: 2px solid #ffccd5;
+  outline: none;
+  font-size: 1rem;
+  transition: 0.3s;
+}
 
-    .busca input:focus {
-      border-color: #ff6b81;
-      box-shadow: 0 0 8px rgba(255, 107, 129, 0.2);
-    }
+.busca input:focus {
+  border-color: #ff6b81;
+  box-shadow: 0 0 8px rgba(255, 107, 129, 0.2);
+}
 
-    /* 3. GRID DE PRODUTOS RESPONSIVO */
-    .produtos {
-      display: grid;
-      /* minmax(250px) garante que os cards não fiquem muito estreitos */
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+/* 3. GRID DE PRODUTOS */
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  padding: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-   /* CARD RESPONSIVO E FLEXÍVEL */
+/* CARD */
 .card {
   background: white;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   padding: 15px;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -99,16 +102,13 @@
   transform: translateY(-5px);
 }
 
-/* TEXTO FLUIDO (SEM BUG EM ANDROID) */
 .card p {
   font-size: 0.9rem;
   color: #666;
   margin: 10px 0 15px 0;
-
-  flex-grow: 1; /* empurra botão pra baixo */
+  flex-grow: 1;
 }
 
-/* PREÇO */
 .card .preco {
   font-size: 1.2rem;
   font-weight: bold;
@@ -116,7 +116,6 @@
   margin-bottom: 10px;
 }
 
-/* BOTÃO */
 .card button {
   background: #ff6b81;
   color: white;
@@ -133,25 +132,75 @@
   background: #e85c72;
 }
 
-/* GRID RESPONSIVO */
-.produtos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  padding: 15px;
+/* CARRINHO */
+.finalizar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.carrinho {
+  padding: 15px;
+  margin: 0;
+  width: 100%;
+}
+
+.carrinho-acoes {
+  display: flex;
+  gap: 10px;
+  margin: 15px 10px;
+}
+
+.btn-enviar {
+  background-color: #23d40c;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  flex: 1;
+  transition: 0.3s;
+}
+
+.btn-limpar {
+  background-color: #ff4d6d;
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  flex: 0.5;
+  transition: 0.3s;
 }
 
 /* MOBILE PORTRAIT (até 480px) */
 @media (max-width: 480px) {
   header {
-    padding: 2.5rem 1rem 1.5rem;
+    padding: 2rem 1rem 1rem;
+  }
+
+  .busca {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .busca input,
+  .busca select,
+  .busca button {
+    width: 100%;
+    max-width: 100%;
   }
 
   .produtos {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
     padding: 10px;
   }
 
@@ -160,11 +209,11 @@
   }
 
   .card h3 {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .card p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .carrinho-acoes {
@@ -178,8 +227,22 @@
   }
 
   .carrinho {
-    margin-left: 0; /* remove margem fixa */
     padding: 10px;
+  }
+}
+
+/* TABLETS (481px até 1024px) */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .produtos {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .busca input,
+  .busca select,
+  .busca button {
+    flex: 1 1 180px;
+    max-width: 250px;
   }
 }
 
@@ -189,9 +252,22 @@
     padding: 1.5rem 0.5rem;
   }
 
+  .busca {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .busca input,
+  .busca select,
+  .busca button {
+    flex: 1 1 150px;
+    max-width: 200px;
+  }
+
   .produtos {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
     padding: 10px;
   }
 
@@ -204,55 +280,11 @@
   }
 
   .carrinho {
-    margin-left: 20px; /* remove margem fixa */
     padding: 10px;
     width: 100%;
-    
   }
 }
-.finalizar{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
 
-  .btn-enviar{
-    background-color: #23d40c;
-    color: rgb(249, 250, 248);
-    border: none;
-    padding: 0.8rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 50%;
-    transition: 0.3s;
-  }
-
-  .btn-limpar{
-    background-color: #ff4d6d;
-    color: rgb(249, 250, 248);
-    border: none;
-    padding: 0.8rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 20%;
-    transition: 0.3s;
-  }
-
-  .carrinho-acoes {
-
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-  }
 
   </style>
 </head>
