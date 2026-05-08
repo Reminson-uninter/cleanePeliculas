@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Painel Administrativo - CleaneSite</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
@@ -12,10 +12,11 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background-color: #f4f4f4;
       margin: 0;
       padding-bottom: 80px;
@@ -28,16 +29,17 @@
       color: #fff;
       padding: 20px 0;
       text-align: center;
-      font-size: clamp(1.2rem, 5vw, 2rem);
+      font-size: clamp(1.1rem, 5vw, 2rem);
       font-weight: bold;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       position: sticky;
       top: 0;
       z-index: 100;
+      backdrop-filter: blur(0px);
     }
 
     main { 
-      padding: 20px;
+      padding: 16px;
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -50,8 +52,8 @@
 
     aside {
       flex: 1;
-      min-width: 280px;
-      padding: 20px;
+      min-width: 260px;
+      padding: 18px;
       background-color: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -61,7 +63,7 @@
 
     .tabela {
       flex: 2;
-      min-width: 280px;
+      min-width: 260px;
       background-color: #fff;
       border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -73,32 +75,35 @@
       color: #ca0d5c;
       margin-top: 0;
       margin-bottom: 20px;
-      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+      font-weight: 600;
     }
 
     .itens label {
       display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+      margin-bottom: 6px;
+      font-weight: 600;
       color: #444;
-      font-size: clamp(0.85rem, 3vw, 0.95rem);
+      font-size: clamp(0.8rem, 3.5vw, 0.9rem);
     }
 
     .itens input, .itens textarea {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
+      padding: 12px;
+      margin-bottom: 16px;
       border: 2px solid #e0e0e0;
-      border-radius: 8px;
+      border-radius: 10px;
       box-sizing: border-box;
-      font-size: clamp(0.85rem, 3vw, 0.95rem);
-      transition: all 0.3s ease;
+      font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+      transition: all 0.25s ease;
+      font-family: inherit;
+      background-color: #fff;
     }
 
     .itens input:focus, .itens textarea:focus {
       outline: none;
       border-color: #ca0d5c;
-      box-shadow: 0 0 0 3px rgba(202, 13, 92, 0.1);
+      box-shadow: 0 0 0 3px rgba(202, 13, 92, 0.15);
     }
 
     .itens input[type="submit"] {
@@ -109,72 +114,76 @@
       cursor: pointer;
       transition: all 0.3s ease;
       font-size: clamp(0.9rem, 4vw, 1rem);
-      padding: 12px;
-    }
-
-    .itens input[type="submit"]:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(202, 13, 92, 0.3);
+      padding: 14px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
     }
 
     .itens input[type="submit"]:active {
-      transform: translateY(0);
+      transform: scale(0.97);
     }
 
-    /* Container da tabela para scroll responsivo */
+    /* container scroll responsivo */
     .tabela-wrapper {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 580px;
+      min-width: 560px;
     }
 
     th {
       background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
       color: #ca0d5c;
-      padding: 15px;
+      padding: 14px 10px;
       border-bottom: 3px solid #ca0d5c;
-      font-size: clamp(0.85rem, 3vw, 1rem);
-      font-weight: bold;
+      font-size: clamp(0.8rem, 3.2vw, 0.95rem);
+      font-weight: 700;
     }
 
     td {
-      padding: 12px;
+      padding: 12px 8px;
       border-bottom: 1px solid #e0e0e0;
       vertical-align: middle;
-      font-size: clamp(0.8rem, 3vw, 0.9rem);
+      font-size: clamp(0.75rem, 3vw, 0.88rem);
     }
 
     .btn-acao {
       border: none;
       background: none;
-      padding: 6px 8px;
+      padding: 8px 6px;
       transition: all 0.2s;
       cursor: pointer;
-      border-radius: 6px;
+      border-radius: 8px;
       margin: 0 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .btn-acao:hover { 
-      transform: scale(1.1);
-      background-color: rgba(202, 13, 92, 0.1);
+    .btn-acao:active { 
+      transform: scale(0.92);
+      background-color: rgba(202, 13, 92, 0.15);
     }
 
     .material-symbols-outlined {
       font-size: 20px;
       color: #ca0d5c;
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      user-select: none;
     }
 
-    /* Preview da imagem */
     .preview-imagem {
-      max-width: 50px;
-      max-height: 50px;
+      max-width: 48px;
+      max-height: 48px;
       border-radius: 8px;
       object-fit: cover;
+      width: auto;
+      height: auto;
     }
 
     footer {
@@ -185,240 +194,417 @@
       color: white;
       text-align: center;
       padding: 12px 0;
-      font-size: clamp(0.7rem, 3vw, 0.85rem);
+      font-size: clamp(0.65rem, 3vw, 0.8rem);
       z-index: 99;
+      backdrop-filter: blur(4px);
     }
 
-    /* ==================== */
-    /* RESPONSIVIDADE OTIMIZADA */
-    /* ==================== */
+    /* ============================================ */
+    /* RESPONSIVIDADE EXTREMA: 120px -> 3840px */
+    /* ============================================ */
 
-    /* Tablets e telas médias (768px - 1024px) */
-    @media (max-width: 1024px) and (min-width: 769px) {
-      .conteudo {
-        flex-direction: row;
-        gap: 15px;
-      }
-
-      .tabela, aside {
-        flex: 1;
-      }
-
+    /* Smartphones ultra pequenos (dobráveis fechados, 280px-360px) */
+    @media (max-width: 360px) {
       main {
-        padding: 15px;
-      }
-
-      th, td {
         padding: 10px;
       }
+      aside, .tabela {
+        padding: 12px;
+      }
+      .itens input, .itens textarea {
+        padding: 10px;
+        margin-bottom: 12px;
+      }
+      th, td {
+        padding: 6px 4px;
+      }
+      .preview-imagem {
+        max-width: 36px;
+        max-height: 36px;
+      }
+      .btn-acao {
+        padding: 4px 3px;
+      }
+      .material-symbols-outlined {
+        font-size: 16px;
+      }
+      table {
+        min-width: 500px;
+      }
+      footer {
+        padding: 8px 0;
+      }
     }
 
-    /* Tablets pequenos e smartphones grandes (481px - 768px) */
-    @media (max-width: 768px) {
-      body {
-        padding-bottom: 70px;
+    /* Dispositivos entre 361px e 480px (iPhone SE, Galaxy S8, etc) */
+    @media (min-width: 361px) and (max-width: 480px) {
+      header {
+        padding: 14px 0;
       }
-
       main {
-        padding: 15px;
+        padding: 12px;
       }
-
       .conteudo {
         flex-direction: column;
-        gap: 15px;
+        gap: 16px;
       }
-
       .tabela, aside {
         width: 100%;
         min-width: auto;
       }
-
       aside {
+        padding: 14px;
         order: 2;
-        padding: 15px;
       }
-
       .tabela {
         order: 1;
       }
-
-      .tabela-wrapper {
-        overflow-x: auto;
-      }
-
-      table {
-        font-size: 0.85rem;
-      }
-
       th, td {
-        padding: 8px;
+        padding: 8px 6px;
+        font-size: 0.75rem;
       }
-
-      .itens input, .itens textarea {
-        padding: 8px;
-      }
-
-      .btn-acao {
-        padding: 4px 6px;
-      }
-
-      .material-symbols-outlined {
-        font-size: 18px;
-      }
-    }
-
-    /* Smartphones pequenos (até 480px) */
-    @media (max-width: 480px) {
-      header {
-        padding: 15px 0;
-      }
-
-      main {
-        padding: 10px;
-      }
-
-      aside {
+      .itens input[type="submit"] {
         padding: 12px;
       }
-
-      .itens h2 {
-        margin-bottom: 15px;
-      }
-
-      .itens input, .itens textarea {
-        margin-bottom: 12px;
-        padding: 8px;
-      }
-
-      .itens input[type="submit"] {
-        padding: 10px;
-      }
-
-      th, td {
-        padding: 6px;
-      }
-
       .preview-imagem {
         max-width: 40px;
         max-height: 40px;
       }
-
-      .btn-acao {
-        padding: 3px 5px;
-      }
-
-      .material-symbols-outlined {
-        font-size: 16px;
-      }
     }
 
-    /* Smartphones muito pequenos (até 360px) */
-    @media (max-width: 360px) {
-      table {
-        min-width: 480px;
+    /* Smartphones médios e grandes (481px - 767px) */
+    @media (min-width: 481px) and (max-width: 767px) {
+      .conteudo {
+        flex-direction: column;
+        gap: 20px;
       }
-
+      .tabela, aside {
+        width: 100%;
+      }
+      aside {
+        order: 2;
+      }
+      .tabela {
+        order: 1;
+      }
       th, td {
-        font-size: 0.7rem;
-        padding: 5px;
+        padding: 10px 8px;
       }
-
       .preview-imagem {
-        max-width: 35px;
-        max-height: 35px;
+        max-width: 44px;
+        max-height: 44px;
       }
     }
 
-    /* Orientação paisagem em dispositivos móveis */
-    @media screen and (orientation: landscape) and (max-height: 600px) {
-      body {
-        padding-bottom: 60px;
-      }
-
-      header {
-        padding: 8px 0;
-      }
-
+    /* Tablets (768px - 1024px) e híbridos */
+    @media (min-width: 768px) and (max-width: 1024px) {
       .conteudo {
         flex-direction: row;
-        gap: 10px;
+        gap: 18px;
       }
-
       .tabela, aside {
         flex: 1;
       }
-
-      aside {
-        padding: 10px;
-        max-height: 70vh;
-        overflow-y: auto;
+      .tabela-wrapper {
+        overflow-x: auto;
       }
-
-      .itens input, .itens textarea {
-        margin-bottom: 8px;
-        padding: 6px;
-      }
-
-      .itens h2 {
-        margin-bottom: 10px;
-        font-size: 1rem;
-      }
-
-      footer {
-        padding: 6px 0;
-      }
-    }
-
-    /* Telas grandes (Desktop) */
-    @media (min-width: 1400px) {
-      main {
-        padding: 30px;
-      }
-
-      .conteudo {
-        gap: 30px;
-      }
-
       th, td {
-        padding: 18px;
-      }
-
-      .itens input, .itens textarea {
-        padding: 12px;
+        padding: 12px 10px;
       }
     }
 
-    /* Suporte para tablets em modo retrato */
+    /* Tablets modo retrato específico: empilha conteúdo */
     @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
       .conteudo {
         flex-direction: column;
       }
+      aside {
+        max-width: 100%;
+      }
     }
 
-    /* Acessibilidade - Redução de movimento */
+    /* Laptops/Desktops pequenos (1025px até 1280px) */
+    @media (min-width: 1025px) and (max-width: 1280px) {
+      main {
+        padding: 24px;
+      }
+      .conteudo {
+        gap: 24px;
+      }
+    }
+
+    /* Telas grandes (>=1400px) */
+    @media (min-width: 1400px) {
+      main {
+        padding: 32px;
+      }
+      .conteudo {
+        gap: 32px;
+      }
+      th, td {
+        padding: 18px 16px;
+      }
+      .itens input, .itens textarea {
+        padding: 14px;
+      }
+    }
+
+    /* ========== ORIENTAÇÃO PAISAGEM (mobile e tablets) ========== */
+    @media screen and (orientation: landscape) and (max-height: 650px) {
+      body {
+        padding-bottom: 55px;
+      }
+      header {
+        padding: 8px 0;
+      }
+      .conteudo {
+        flex-direction: row;
+        gap: 12px;
+      }
+      aside {
+        max-height: 68vh;
+        overflow-y: auto;
+        padding: 12px;
+      }
+      .tabela {
+        max-height: 68vh;
+        overflow: hidden;
+      }
+      .tabela-wrapper {
+        max-height: 65vh;
+        overflow-y: auto;
+      }
+      .itens input, .itens textarea {
+        margin-bottom: 8px;
+        padding: 6px 10px;
+      }
+      .itens h2 {
+        margin-bottom: 8px;
+        font-size: 1rem;
+      }
+      footer {
+        padding: 6px 0;
+      }
+      .btn-acao {
+        padding: 4px 5px;
+      }
+    }
+
+    /* Paisagem para telas muito largas mas baixas (até 500px de altura) */
+    @media screen and (orientation: landscape) and (max-height: 500px) {
+      aside {
+        max-height: 70vh;
+      }
+      .itens input[type="submit"] {
+        padding: 8px;
+      }
+    }
+
+    /* ========== DISPOSITIVOS ESPECÍFICOS COM ALTA PRECISÃO ========== */
+
+    /* iPhone 14 Pro Max (430px portrait), Samsung S23 Ultra etc */
+    @media (min-width: 410px) and (max-width: 440px) and (orientation: portrait) {
+      header {
+        font-size: 1.3rem;
+        padding: 15px 0;
+      }
+      .preview-imagem {
+        max-width: 45px;
+        max-height: 45px;
+      }
+      td, th {
+        font-size: 0.8rem;
+      }
+      .btn-acao .material-symbols-outlined {
+        font-size: 18px;
+      }
+    }
+
+    /* iPhone 12/13/14 (390px) */
+    @media (min-width: 375px) and (max-width: 400px) and (orientation: portrait) {
+      .preview-imagem {
+        max-width: 42px;
+        max-height: 42px;
+      }
+      th, td {
+        padding: 8px 5px;
+      }
+    }
+
+    /* Galaxy Fold / pequenos dobráveis (280px - 320px) */
+    @media (max-width: 320px) {
+      table {
+        min-width: 460px;
+      }
+      th {
+        font-size: 0.7rem;
+        padding: 6px 4px;
+      }
+      td {
+        font-size: 0.65rem;
+        padding: 6px 3px;
+      }
+      .btn-acao {
+        padding: 2px 3px;
+      }
+      .material-symbols-outlined {
+        font-size: 14px;
+      }
+      .preview-imagem {
+        max-width: 32px;
+        max-height: 32px;
+      }
+      .itens h2 {
+        font-size: 1rem;
+      }
+      .itens input, .itens textarea {
+        padding: 8px;
+      }
+    }
+
+    /* Redmi Note 12 / Samsung A54 (portrait ~412px) */
+    @media (min-width: 400px) and (max-width: 430px) and (orientation: portrait) {
+      .preview-imagem {
+        max-width: 46px;
+        max-height: 46px;
+      }
+      th, td {
+        padding: 9px 6px;
+      }
+    }
+
+    /* landscape para modelos com largura 840~930px (Redmi Note, etc) */
+    @media (min-width: 830px) and (max-width: 950px) and (orientation: landscape) {
+      .conteudo {
+        flex-direction: row;
+        gap: 18px;
+      }
+      .tabela, aside {
+        flex: 1;
+      }
+      aside {
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+      table {
+        font-size: 0.85rem;
+      }
+      .btn-acao {
+        padding: 6px 8px;
+      }
+    }
+
+    /* iPad Mini / iPad Air (portrait e small landscape) */
+    @media (min-width: 744px) and (max-width: 1024px) and (orientation: portrait) {
+      .conteudo {
+        flex-direction: column;
+      }
+      .tabela-wrapper {
+        overflow-x: auto;
+      }
+      table {
+        min-width: 700px;
+      }
+    }
+
+    /* Dispositivos com notch / dynamic island - ajustes seguros */
+    @supports (padding: max(0px)) {
+      header {
+        padding-top: max(16px, env(safe-area-inset-top));
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+      }
+      footer {
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+      }
+      main {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+      }
+    }
+
+    /* Melhor touch para botões em mobile */
+    @media (hover: none) and (pointer: coarse) {
+      .btn-acao, .itens input[type="submit"] {
+        min-height: 44px;
+      }
+      .btn-acao {
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .material-symbols-outlined {
+        font-size: 24px;
+      }
+    }
+
+    /* Acessibilidade - redução de movimento */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
     }
 
-    /* Touch-friendly para mobile */
-    @media (hover: none) and (pointer: coarse) {
-      .btn-acao {
-        padding: 8px 10px;
-      }
-      
-      .btn-acao:hover {
-        transform: none;
-      }
-      
-      .itens input[type="submit"] {
-        padding: 14px;
+    /* Scroll suave e feedback */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Ajuste para inputs em mobile evitando zoom automático (font-size >= 16px) */
+    @media (max-width: 768px) {
+      input, select, textarea {
+        font-size: 16px !important;
       }
     }
+
+    /* Melhor aparência de hover apenas em dispositivos com mouse */
+    @media (hover: hover) {
+      .itens input[type="submit"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(202, 13, 92, 0.35);
+      }
+      .btn-acao:hover { 
+        transform: scale(1.08);
+        background-color: rgba(202, 13, 92, 0.1);
+      }
+    }
+
+    /* Modo noturno básico (opcional, respeita preferência) */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+      }
+      .tabela, aside {
+        background-color: #1e1e1e;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      }
+      .itens label, .itens h2 {
+        color: #e0e0e0;
+      }
+      .itens input, .itens textarea {
+        background-color: #2c2c2c;
+        border-color: #444;
+        color: #f0f0f0;
+      }
+      th {
+        background: #252525;
+        color: #ff80ab;
+        border-bottom-color: #ca0d5c;
+      }
+      td {
+        border-bottom-color: #333;
+        color: #ccc;
+      }
+      .btn-acao .material-symbols-outlined {
+        color: #ff80ab;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -428,21 +614,27 @@
     <section class="conteudo">
       <!-- Tabela de Produtos -->
       <div class="tabela">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Preço</th>
-              <th>Preview</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="corpo-tabela">
-            <!-- Linhas geradas dinamicamente pelo cadastro.js -->
-          </tbody>
-        </table>
+        <div class="tabela-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+                <th>Preview</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+              <!-- Linhas geradas dinamicamente pelo cadastro.js -->
+              <tr>
+                <td colspan="7" style="text-align: center;">Carregando produtos...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <!-- Formulário de Cadastro/Edição -->
@@ -460,7 +652,7 @@
           <input type="number" id="preco" name="preco" step="0.01" placeholder="0.00" required>
 
           <label for="estoque">Quantidade em Estoque</label>
-           <input type="number" id="estoque" name="estoque" placeholder="0" required>
+          <input type="number" id="estoque" name="estoque" placeholder="0" required>
 
           <label for="imagem">Foto do Produto</label>
           <input type="file" id="imagem" name="imagem" accept="image/*">
@@ -476,11 +668,6 @@
   </footer>
 
   <!-- Script de integração -->
-   <!-- Firebase SDKs -->
-
-<!-- Script principal -->
-<script type="module" src="firestore.js"></script>
-
- 
+  <script type="module" src="firestore.js"></script>
 </body>
 </html>
