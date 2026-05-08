@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 //import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
@@ -193,7 +193,7 @@ window.enviarPedido = async function () {
 
   carregarProdutos();
 });
-=======
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 //import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
@@ -388,4 +388,4 @@ window.enviarPedido = async function () {
 
   carregarProdutos();
 });
->>>>>>> d610113 (comentario)
+
