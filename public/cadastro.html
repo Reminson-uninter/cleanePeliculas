@@ -8,55 +8,72 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       background-color: #f4f4f4;
       margin: 0;
-      padding-bottom: 60px;
+      padding-bottom: 80px;
+      min-height: 100vh;
     }
 
     header {
-      background-color: #ca0d5c;
+      width: 100%;
+      background: linear-gradient(135deg, #ca0d5c 0%, #a80b48 100%);
       color: #fff;
       padding: 20px 0;
       text-align: center;
-      font-size: 2rem;
+      font-size: clamp(1.2rem, 5vw, 2rem);
       font-weight: bold;
       box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    main { padding: 20px; }
+    main { 
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
     .conteudo {
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap-reverse;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     aside {
       flex: 1;
-      min-width: 300px;
+      min-width: 280px;
       padding: 20px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       height: fit-content;
+      transition: all 0.3s ease;
     }
 
     .tabela {
       flex: 2;
-      min-width: 350px;
-      overflow-x: auto;
+      min-width: 280px;
       background-color: #fff;
-      border-radius: 8px;
+      border-radius: 12px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
     }
 
     .itens h2 {
       text-align: center;
       color: #ca0d5c;
       margin-top: 0;
+      margin-bottom: 20px;
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
     }
 
     .itens label {
@@ -64,128 +81,344 @@
       margin-bottom: 5px;
       font-weight: bold;
       color: #444;
+      font-size: clamp(0.85rem, 3vw, 0.95rem);
     }
 
     .itens input, .itens textarea {
       width: 100%;
       padding: 10px;
       margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
       box-sizing: border-box;
+      font-size: clamp(0.85rem, 3vw, 0.95rem);
+      transition: all 0.3s ease;
+    }
+
+    .itens input:focus, .itens textarea:focus {
+      outline: none;
+      border-color: #ca0d5c;
+      box-shadow: 0 0 0 3px rgba(202, 13, 92, 0.1);
     }
 
     .itens input[type="submit"] {
-      background-color: #ca0d5c;
+      background: linear-gradient(135deg, #ca0d5c 0%, #a80b48 100%);
       color: #fff;
       border: none;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      font-size: clamp(0.9rem, 4vw, 1rem);
+      padding: 12px;
     }
 
     .itens input[type="submit"]:hover {
-      background-color: #a80b48;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(202, 13, 92, 0.3);
+    }
+
+    .itens input[type="submit"]:active {
+      transform: translateY(0);
+    }
+
+    /* Container da tabela para scroll responsivo */
+    .tabela-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
+      min-width: 580px;
     }
 
     th {
-      background-color: #f8f8f8;
+      background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
       color: #ca0d5c;
       padding: 15px;
-      border-bottom: 2px solid #ca0d5c;
+      border-bottom: 3px solid #ca0d5c;
+      font-size: clamp(0.85rem, 3vw, 1rem);
+      font-weight: bold;
     }
 
     td {
       padding: 12px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #e0e0e0;
       vertical-align: middle;
+      font-size: clamp(0.8rem, 3vw, 0.9rem);
     }
 
     .btn-acao {
       border: none;
       background: none;
-      padding: 0;
-      transition: transform 0.2s;
+      padding: 6px 8px;
+      transition: all 0.2s;
       cursor: pointer;
+      border-radius: 6px;
+      margin: 0 2px;
     }
 
-    .btn-acao:hover { transform: scale(1.1); }
+    .btn-acao:hover { 
+      transform: scale(1.1);
+      background-color: rgba(202, 13, 92, 0.1);
+    }
+
+    .material-symbols-outlined {
+      font-size: 20px;
+      color: #ca0d5c;
+    }
+
+    /* Preview da imagem */
+    .preview-imagem {
+      max-width: 50px;
+      max-height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
 
     footer {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #ca0d5c;
+      background: linear-gradient(135deg, #ca0d5c 0%, #a80b48 100%);
       color: white;
       text-align: center;
-      padding: 15px 0;
+      padding: 12px 0;
+      font-size: clamp(0.7rem, 3vw, 0.85rem);
+      z-index: 99;
     }
-    /* Ajustes gerais para telas menores */
-@media (max-width: 768px) {
-  header {
-    font-size: 1.5rem;
-    padding: 15px 0;
-  }
 
-  .conteudo {
-    flex-direction: column;   /* empilha tabela e formulário */
-    gap: 15px;
-  }
+    /* ==================== */
+    /* RESPONSIVIDADE OTIMIZADA */
+    /* ==================== */
 
-  .tabela, aside {
-    min-width: 100%;          /* ocupa toda a largura */
-    box-shadow: none;         /* simplifica para mobile */
-  }
+    /* Tablets e telas médias (768px - 1024px) */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .conteudo {
+        flex-direction: row;
+        gap: 15px;
+      }
 
-  table {
-    font-size: 0.9rem;        /* reduz fonte da tabela */
-  }
+      .tabela, aside {
+        flex: 1;
+      }
 
-  th, td {
-    padding: 8px;
-  }
+      main {
+        padding: 15px;
+      }
 
-  .itens input, .itens textarea {
-    font-size: 1rem;
-    padding: 8px;
-  }
+      th, td {
+        padding: 10px;
+      }
+    }
 
-  .itens input[type="submit"] {
-    width: 100%;              /* botão ocupa toda a largura */
-    padding: 12px;
-  }
+    /* Tablets pequenos e smartphones grandes (481px - 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: 70px;
+      }
 
-  footer {
-    font-size: 0.8rem;
-    padding: 10px 0;
-  }
-}
+      main {
+        padding: 15px;
+      }
 
-/* Ajustes extras para telas muito pequenas (celulares) */
-@media (max-width: 480px) {
-  header {
-    font-size: 1.2rem;
-  }
+      .conteudo {
+        flex-direction: column;
+        gap: 15px;
+      }
 
-  table {
-    display: block;
-    overflow-x: auto;         /* rolagem horizontal se necessário */
-  }
+      .tabela, aside {
+        width: 100%;
+        min-width: auto;
+      }
 
-  th, td {
-    font-size: 0.8rem;
-  }
+      aside {
+        order: 2;
+        padding: 15px;
+      }
 
-  .itens h2 {
-    font-size: 1.2rem;
-  }
-}
+      .tabela {
+        order: 1;
+      }
 
+      .tabela-wrapper {
+        overflow-x: auto;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 8px;
+      }
+
+      .itens input, .itens textarea {
+        padding: 8px;
+      }
+
+      .btn-acao {
+        padding: 4px 6px;
+      }
+
+      .material-symbols-outlined {
+        font-size: 18px;
+      }
+    }
+
+    /* Smartphones pequenos (até 480px) */
+    @media (max-width: 480px) {
+      header {
+        padding: 15px 0;
+      }
+
+      main {
+        padding: 10px;
+      }
+
+      aside {
+        padding: 12px;
+      }
+
+      .itens h2 {
+        margin-bottom: 15px;
+      }
+
+      .itens input, .itens textarea {
+        margin-bottom: 12px;
+        padding: 8px;
+      }
+
+      .itens input[type="submit"] {
+        padding: 10px;
+      }
+
+      th, td {
+        padding: 6px;
+      }
+
+      .preview-imagem {
+        max-width: 40px;
+        max-height: 40px;
+      }
+
+      .btn-acao {
+        padding: 3px 5px;
+      }
+
+      .material-symbols-outlined {
+        font-size: 16px;
+      }
+    }
+
+    /* Smartphones muito pequenos (até 360px) */
+    @media (max-width: 360px) {
+      table {
+        min-width: 480px;
+      }
+
+      th, td {
+        font-size: 0.7rem;
+        padding: 5px;
+      }
+
+      .preview-imagem {
+        max-width: 35px;
+        max-height: 35px;
+      }
+    }
+
+    /* Orientação paisagem em dispositivos móveis */
+    @media screen and (orientation: landscape) and (max-height: 600px) {
+      body {
+        padding-bottom: 60px;
+      }
+
+      header {
+        padding: 8px 0;
+      }
+
+      .conteudo {
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .tabela, aside {
+        flex: 1;
+      }
+
+      aside {
+        padding: 10px;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      .itens input, .itens textarea {
+        margin-bottom: 8px;
+        padding: 6px;
+      }
+
+      .itens h2 {
+        margin-bottom: 10px;
+        font-size: 1rem;
+      }
+
+      footer {
+        padding: 6px 0;
+      }
+    }
+
+    /* Telas grandes (Desktop) */
+    @media (min-width: 1400px) {
+      main {
+        padding: 30px;
+      }
+
+      .conteudo {
+        gap: 30px;
+      }
+
+      th, td {
+        padding: 18px;
+      }
+
+      .itens input, .itens textarea {
+        padding: 12px;
+      }
+    }
+
+    /* Suporte para tablets em modo retrato */
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+      .conteudo {
+        flex-direction: column;
+      }
+    }
+
+    /* Acessibilidade - Redução de movimento */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Touch-friendly para mobile */
+    @media (hover: none) and (pointer: coarse) {
+      .btn-acao {
+        padding: 8px 10px;
+      }
+      
+      .btn-acao:hover {
+        transform: none;
+      }
+      
+      .itens input[type="submit"] {
+        padding: 14px;
+      }
+    }
   </style>
 </head>
 <body>
